@@ -5,6 +5,7 @@
 - Git - [Download & Install Git](https://git-scm.com/downloads).
 - Node.js - [Download & Install Node.js](https://nodejs.org/en/download/) and the npm package manager.
 - Docker - https://docs.docker.com/engine/install/.
+- DockerHub - https://hub.docker.com/
 
 ## Downloading
 
@@ -41,7 +42,7 @@ docker compose up
 After starting the app on port (3001 as default) you can open
 in your browser OpenAPI documentation by typing http://localhost:3001/.
 
-### Linter
+## Linter
 
 ```
 cd server
