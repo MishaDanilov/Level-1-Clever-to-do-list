@@ -1,4 +1,4 @@
-# RS School REST service
+# Level 1 Clever to-do list
 
 ## Prerequisites
 
