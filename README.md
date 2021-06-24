@@ -17,7 +17,6 @@ git clone {repository URL}
 
 ```
 PORT=3001
-AUTH_MODE=false
 JWT_SECRET_KEY=secret-key
 
 POSTGRES_HOST=postgres
