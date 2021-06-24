@@ -1,0 +1,51 @@
+version: "3"
+services:
+  node:
+    image: andropoulos/task1_practice:node
+    build: ./server
+    ports:
+      - 3001:3001
+    depends_on:
+      - postgres
+    restart: always
+    volumes:
+      - ./server/routes:/usr/app/routes
+      - ./server/models:/usr/app/models
+    environment:
+      PORT: ${PORT}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+    networks:
+      - app-net
+  # client:
+  #   image: andropoulos/task1_practice:client
+  #   build: ./
+  # ports:
+  #   - "3000:3000"
+  # volumes:
+  #   - ./client/build:/react-ui/build
+  postgres:
+    image: andropoulos/task1_practice:postgres
+    build: ./server/database/
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_PORT: ${POSTGRES_PORT}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - data:/var/lib/postgresql/data
+    networks:
+      - app-net
+    restart: always
+networks:
+  app-net:
+    driver: bridge
+volumes:
+  data:
