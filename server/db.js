@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const config = require("./common/config.js");
+
 console.log(config.POSTGRES_HOST);
 const sequelize = new Sequelize(
   config.POSTGRES_DB,

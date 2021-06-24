@@ -1,13 +1,14 @@
 const express = require("express");
-const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { check, validationResult } = require("express-validator");
 const config = require("../common/config");
 
-const { check, validationResult } = require("express-validator");
+const User = require("../models/User");
+
 const router = express.Router();
 
-//api/auth/register
+// api/auth/register
 router.post(
   "/register",
   [
@@ -31,7 +32,7 @@ router.post(
 
       const isExist = await User.findOne({
         where: {
-          email: email,
+          email,
         },
       });
 
@@ -43,23 +44,23 @@ router.post(
 
       const encryptedPassword = await bcrypt.hash(password, 12);
 
-      const user = await User.create({
-        email: email,
+      await User.create({
+        email,
         password: encryptedPassword,
       });
 
-      res.status(200).json({
+      return res.status(200).json({
         message: "Создан пользователь.",
       });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: "Что-то пошло не так.",
       });
     }
   }
 );
 
-//api/auth/login
+// api/auth/login
 router.post(
   "/login",
   [
@@ -81,7 +82,7 @@ router.post(
 
       const user = await User.findOne({
         where: {
-          email: email,
+          email,
         },
       });
 
@@ -101,9 +102,9 @@ router.post(
         expiresIn: "1h",
       });
 
-      res.status(200).json({ token, userId: user.id });
+      return res.status(200).json({ token, userId: user.id });
     } catch (error) {
-      res.status(500).json({
+      return res.status(500).json({
         message: error.message,
       });
     }

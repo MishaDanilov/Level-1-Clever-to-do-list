@@ -14,9 +14,9 @@ router.get("/tasks/:id", async (req, res) => {
         .json({ status: false, message: "Пользователя не существует." });
     }
     const tasks = await user.getTasks();
-    res.status(200).json(tasks);
+    return res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Что-то пошло не так.",
     });
   }
@@ -33,9 +33,9 @@ router.post("/tasks/:id", async (req, res) => {
         .json({ status: false, message: "Пользователя не существует." });
     }
     const task = await user.createTask({ title, content, date });
-    res.status(200).json(task);
+    return res.status(200).json(task);
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Что-то пошло не так.",
     });
   }
@@ -51,13 +51,13 @@ router.put("/tasks/:id", async (req, res) => {
         .status(404)
         .json({ status: false, message: "Задачи не существует." });
     }
-    const task = await Task.update(
+    await Task.update(
       { title, content, date, done },
       { where: { id: taskId } }
     );
-    res.status(200).json({ status: true, message: "Задача обновлена." });
+    return res.status(200).json({ status: true, message: "Задача обновлена." });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Что-то пошло не так.",
     });
   }
@@ -72,10 +72,10 @@ router.delete("/tasks/:id", async (req, res) => {
         .status(404)
         .json({ status: false, message: "Задачи не существует." });
     }
-    const result = await Task.destroy({ where: { id: taskId } });
-    res.status(200).json({ status: true, message: "Задача удалена." });
+    await Task.destroy({ where: { id: taskId } });
+    return res.status(200).json({ status: true, message: "Задача удалена." });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       message: "Что-то пошло не так.",
     });
   }

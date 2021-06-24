@@ -1,5 +1,5 @@
+const { DataTypes } = require("sequelize");
 const sequelize = require("../db");
-const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const Task = sequelize.define("task", {
   id: {
@@ -20,11 +20,11 @@ const Task = sequelize.define("task", {
     type: DataTypes.DATE,
     allowNull: false,
   },
-  done:{
+  done: {
     type: DataTypes.BOOLEAN,
     allowNull: false,
-    defaultValue: "0"
-  }
+    defaultValue: "0",
+  },
 });
 
 module.exports = Task;

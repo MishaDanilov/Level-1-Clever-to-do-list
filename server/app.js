@@ -1,7 +1,6 @@
 const express = require("express");
-const sequelize = require("./db");
-const config = require("./common/config.js");
 const path = require("path");
+const config = require("./common/config.js");
 require("./models/relationships");
 
 const app = express();
