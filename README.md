@@ -29,6 +29,10 @@ POSTGRES_PASSWORD=<your postgres password>
 ## Building Docker
 
 ```
+cd server
+```
+
+```
 docker compose build
 ```
 
