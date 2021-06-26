@@ -39,6 +39,10 @@ docker compose build
 ## Starting Docker containers
 
 ```
+cd server
+```
+
+```
 docker compose up
 ```
 
